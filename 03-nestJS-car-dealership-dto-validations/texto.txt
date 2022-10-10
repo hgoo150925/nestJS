@@ -16,3 +16,16 @@ validación : evalúe los datos de entrada y, si son válidos, simplemente páse
 
 ## Post 
 Cuando se crea una peticion Post se manda un body en formato JSON, form-data, etc
+
+## DTO (Data transfer Object)
+El DTO sería el objeto JSON que se transfiere desde el cliente al servidor (o viceversa) para realizar la operativa necesaria para el funcionamiento de la aplicación.
+El DTO tambien se utiliza para el tipado de datos y su segurizacion
+Es un objeto para transferir ese objeto en diferentes piezas de mi app
+
+## UUID
+Nos permite generar IDs unicos
+- yarn add uuid
+- yarn add -D @types/uuid
+- ParseUUIDPipe
+Personalizar la version de uuid pipe que queremos usar:
+- new ParseUUIDPipe({version:'4'})
