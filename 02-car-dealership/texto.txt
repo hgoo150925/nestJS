@@ -13,3 +13,6 @@ Dentro de Module en providers se agregan los servicios
 Las Pipes tienen dos casos de uso típicos:
 transformación : transforma los datos de entrada a la forma deseada (por ejemplo, de cadena a entero)
 validación : evalúe los datos de entrada y, si son válidos, simplemente páselos sin cambios; de lo contrario, lanza una excepción cuando los datos son incorrectos
+
+## Post 
+Cuando se crea una peticion Post se manda un body en formato JSON, form-data, etc

@@ -1,4 +1,13 @@
-import { Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CarsService } from './cars.service';
 
 // https://docs.nestjs.com/controllers
@@ -22,12 +31,22 @@ export class CarsController {
     return this.carsService.findOneById(id);
   }
 
-  // Post crea un recurso
+  // Post crea un recurso y para enviar el body se le agrega el decorador @Body a la funcion
   @Post()
-  createCar() {
+  createCar(@Body() body: any) {
+    return body;
+  }
+
+  @Patch(':id')
+  updateCar(@Body() body: any) {
+    return body;
+  }
+
+  @Delete(':id')
+  deleteCar(@Param('id', ParseIntPipe) id: number) {
     return {
-      ok: true,
-      method: 'POST',
+      method: 'delete',
+      id,
     };
   }
 }
