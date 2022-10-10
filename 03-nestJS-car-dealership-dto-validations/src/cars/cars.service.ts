@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Car } from './interfaces/car.interface';
 import { v4 as uuid } from 'uuid';
+
+import { Car } from './interfaces/car.interface';
+import { CreateCarDto } from './dto/create-car.dto';
 
 // Services alojan la lógica de negocio de tal manera que sea
 // reutilizable mediante inyección de dependencias.
@@ -41,6 +43,15 @@ export class CarsService {
       // Usualmente Nest ya incluye todos los casos de uso comunes, pero se pueden expandir basado en las necesidades.
       throw new NotFoundException(`Car with id: '${id}' not found`);
     }
+    return car;
+  }
+
+  create(createCarDto: CreateCarDto) {
+    const car: Car = {
+      id: uuid(),
+      ...createCarDto,
+    };
+    this.cars.push(car);
     return car;
   }
 }
