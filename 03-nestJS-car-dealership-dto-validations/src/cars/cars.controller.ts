@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update-car.dto';
 
 // https://docs.nestjs.com/controllers
 // Los controladores son responsables de manejar las solicitudes entrantes (request) y devolver las respuestas (response) al cliente.
@@ -39,8 +40,11 @@ export class CarsController {
   }
 
   @Patch(':id')
-  updateCar(@Body() body: any) {
-    return body;
+  updateCar(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateCarDto: UpdateCarDto,
+  ) {
+    return this.carsService.update(updateCarDto);
   }
 
   @Delete(':id')

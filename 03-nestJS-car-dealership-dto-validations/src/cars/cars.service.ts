@@ -1,9 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { v4 as uuid } from 'uuid';
 
 import { Car } from './interfaces/car.interface';
-import { CreateCarDto } from './dto/create-car.dto';
+import { CreateCarDto, UpdateCarDto } from './dto/index';
 
 // Services alojan la lógica de negocio de tal manera que sea
 // reutilizable mediante inyección de dependencias.
@@ -53,5 +57,24 @@ export class CarsService {
     };
     this.cars.push(car);
     return car;
+  }
+
+  update(id: string, updateCarDto: UpdateCarDto) {
+    // validacion de que el id exista
+    let carDB = this.findOneById(id);
+
+    if (updateCarDto.id && updateCarDto.id !== id) {
+      throw new BadRequestException(`Car id: ${id} is not valid`);
+    }
+
+    // generar un nuevo array en el car
+    this.cars = this.cars.map((car) => {
+      if (car.id === id) {
+        carDB = { ...carDB, ...updateCarDto, id };
+        return carDB;
+      }
+      return car;
+    });
+    return carDB;
   }
 }
