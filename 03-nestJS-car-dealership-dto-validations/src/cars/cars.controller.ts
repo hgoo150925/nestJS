@@ -34,8 +34,8 @@ export class CarsController {
 
   // Post crea un recurso y para enviar el body se le agrega el decorador @Body a la funcion
   @Post()
-  createCar(@Body() body: CreateCarDto) {
-    return body;
+  createCar(@Body() createCarDto: CreateCarDto) {
+    return createCarDto;
   }
 
   @Patch(':id')
