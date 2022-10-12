@@ -32,7 +32,7 @@ export class CarsService {
       brand: 'Volkswagen',
       model: 'Gol',
     },
-  ];
+    ];
 
   findAll() {
     return this.cars;
@@ -63,6 +63,7 @@ export class CarsService {
     // validacion de que el id exista
     let carDB = this.findOneById(id);
 
+    // si es un auto diferente enviamos un mensaje de error
     if (updateCarDto.id && updateCarDto.id !== id) {
       throw new BadRequestException(`Car id: ${id} is not valid`);
     }
@@ -76,5 +77,10 @@ export class CarsService {
       return car;
     });
     return carDB;
+  }
+
+  delete(id: string) {
+    const car = this.findOneById(id);
+    this.cars = this.cars.filter(car => car.id !== id);
   }
 }
